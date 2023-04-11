@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../movieDataModel/movieData.dart';
+import 'movie_ui/movie_ui.dart';
 
 class MovieListView extends StatelessWidget {
 
@@ -42,8 +43,6 @@ class MovieListView extends StatelessWidget {
              movieCard(movieList[index], context),
             Positioned(
               top: 10.0,
-
-
                 child: movieImage(movieList[index].images[0])),
           ]);
           }),
@@ -140,13 +139,19 @@ class MovieListViewDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Movies  "),
+        title: Text("Movies"),
         backgroundColor: Colors.blueGrey.shade900,
       ),
 
       body: ListView(
         children: <Widget>[
-          MovieDetailsThumbNails(thumbnail: movie.images[0],)
+          MovieDetailsThumbNails(thumbnail: movie.images[0],),
+          MovieDetailsHeaderWithPoster(movie: movie),
+          HorizontalLine(),
+          SizedBox(height: 5,),
+          MovieDetailsCast(movie: movie),
+          HorizontalLine(),
+          MovieDetailsExtraPoster(posters: movie.images,)
         ],
       ),
 
@@ -165,35 +170,10 @@ class MovieListViewDetails extends StatelessWidget {
   }
   
 }
-class MovieDetailsThumbNails extends StatelessWidget {
-  const MovieDetailsThumbNails({Key? key, required this.thumbnail}) : super(key: key);
-      final String thumbnail;
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      children:<Widget> [
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 190,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(thumbnail),
-                  fit: BoxFit.cover
-                ),
 
-              ),
-            ),
-            Icon(Icons.play_circle_outlined,color: Colors.white, size: 100,)
-          ],
-        ),
-A1
-      ],
-    );
-  }
-}
+
+
+
+
 
 
